@@ -90,6 +90,9 @@ function render(html, host, page) {
   html = setMeta(html, 'property="og:title"', page.title);
   html = setMeta(html, 'property="og:description"', page.description);
   html = setMeta(html, 'property="og:url"', page.canonical);
+  html = setMeta(html, 'property="og:site_name"', "Jovenet");
+  html = setMeta(html, 'property="og:locale"', page.lang === "fr" ? "fr_FR" : "en_US");
+  html = setMeta(html, 'property="og:type"', "website");
   html = setMeta(html, 'name="twitter:card"', "summary");
   html = setMeta(html, 'name="twitter:title"', page.title);
   html = setMeta(html, 'name="twitter:description"', page.description);
