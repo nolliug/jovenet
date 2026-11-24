@@ -70,22 +70,22 @@ const esc = (value) => String(value).replace(/[&<>"']/g, (c) => ({
 }[c]));
 
 function setElement(html, id, value, tag) {
-  const re = new RegExp("<" + tag + "(\\\\s+[^>]*?\\\\sid=[\\\\\"']" + id + "[\\\\\"'][^>]*)>[\\\\s\\\\S]*?<\\\\/" + tag + ">", "i");
+  const re = new RegExp("<" + tag + "(\\s+[^>]*?\\sid=[\\\"']" + id + "[\\\"'][^>]*)>[\\s\\S]*?<\\/" + tag + ">", "i");
   return html.replace(re, (match, attrs) => "<" + tag + attrs + ">" + esc(value) + "</" + tag + ">");
 }
 
 function setMeta(html, selector, value) {
   const re = new RegExp("<meta(?=[^>]*" + selector + ")[^>]*>", "i");
   if (re.test(html)) return html.replace(re, (tag) => {
-    if (/\\\\scontent=/i.test(tag)) return tag.replace(/content=(["']).*?\\\\1/i, 'content="' + esc(value) + '"');
-    return tag.replace(/\\\\s*\\\\/?>(?=$)/, ' content="' + esc(value) + '">');
+    if (/\\scontent=/i.test(tag)) return tag.replace(/content=(["']).*?\\1/i, 'content="' + esc(value) + '"');
+    return tag.replace(/\\s*\\/?>(?=$)/, ' content="' + esc(value) + '">');
   });
   return html.replace("</head>", '<meta ' + selector + ' content="' + esc(value) + '">\\n</head>');
 }
 
 function render(html, host, page) {
-  html = html.replace(/<html([^>]*)lang=(["']).*?\\\\2/i, '<html$1lang="' + page.lang + '"');
-  html = html.replace(/<title>[\\\\s\\\\S]*?<\\\\/title>/i, "<title>" + esc(page.title) + "</title>");
+  html = html.replace(/<html([^>]*)lang=(["']).*?\\2/i, '<html$1lang="' + page.lang + '"');
+  html = html.replace(/<title>[\\s\\S]*?<\\/title>/i, "<title>" + esc(page.title) + "</title>");
   html = setMeta(html, 'name="description"', page.description);
   html = setMeta(html, 'property="og:title"', page.title);
   html = setMeta(html, 'property="og:description"', page.description);
@@ -122,13 +122,13 @@ function render(html, host, page) {
       "https://bsky.app/profile/gtld.club"
     ]
   };
-  html = html.replace("</head>", '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, "\\\\u003c") + '</script>\\n</head>');
+  html = html.replace("</head>", '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, "\\u003c") + '</script>\\n</head>');
   return html;
 }
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);
-  const host = url.hostname.toLowerCase().replace(/^www\\\\./, "");
+  const host = url.hostname.toLowerCase().replace(/^www\\./, "");
   const page = PAGES[host];
   if (!page) return context.env.ASSETS.fetch(context.request);
 
