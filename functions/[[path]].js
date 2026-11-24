@@ -85,7 +85,7 @@ function setMeta(html, selector, value) {
 
 function render(html, host, page) {
   html = html.replace(/<html([^>]*)lang=(["']).*?\2/i, '<html$1lang="' + page.lang + '"');
-  html = html.replace(/<title>[\\s\\S]*?<\/title>/i, "<title>" + esc(page.title) + "</title>");
+  html = html.replace(/<title>[\s\S]*?<\/title>/i, "<title>" + esc(page.title) + "</title>");
   html = setMeta(html, 'name="description"', page.description);
   html = setMeta(html, 'property="og:title"', page.title);
   html = setMeta(html, 'property="og:description"', page.description);
@@ -128,16 +128,16 @@ function render(html, host, page) {
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);
-  const host = url.hostname.toLowerCase().replace(/^www\\./, "");
+  const host = url.hostname.toLowerCase().replace(/^www\./, "");
   const page = PAGES[host];
   if (!page) return context.env.ASSETS.fetch(context.request);
 
   if (url.pathname === "/robots.txt") {
-    const body = "User-agent: *\\nAllow: /\\nSitemap: " + page.canonical + "sitemap.xml\\n";
+    const body = "User-agent: *\nAllow: /\nSitemap: " + page.canonical + "sitemap.xml\n";
     return new Response(body, { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=3600" } });
   }
   if (url.pathname === "/sitemap.xml") {
-    const body = '<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>' + esc(page.canonical) + '</loc></url></urlset>';
+    const body = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>' + esc(page.canonical) + '</loc></url></urlset>';
     return new Response(body, { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=3600" } });
   }
 
