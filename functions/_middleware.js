@@ -13,7 +13,8 @@ const PAGES = {
     storyCopy: "From the first ICANN new gTLD round onward, Jovenet has followed the development of the programme and the changing landscape for applicants, brands and the domain name industry.",
     contactTitle: "Continue the conversation",
     contactCopy: "For enquiries, connect directly with Jean Guillon on LinkedIn.",
-    partnerLead: "Also:"
+    networkTitle: "A new chapter in registry development",
+    networkCopy: "Jean Guillon is now developing registries for Vant Nexus Technologies LLC in Dubai. Follow developments through The gTLD Blog and The gTLD Network, or subscribe to our newsletter."
   },
   "jovenet.com": {
     lang: "en",
@@ -29,7 +30,8 @@ const PAGES = {
     storyCopy: "For 14 years, Jovenet Consulting followed the first ICANN new gTLD round and the continuing evolution of the programme, building a perspective on this changing domain name landscape.",
     contactTitle: "Learn more",
     contactCopy: "For further information, connect with Jean Guillon on LinkedIn.",
-    partnerLead: "Explore:"
+    networkTitle: "An expanding role in the domain name industry",
+    networkCopy: "Jean Guillon is now developing registry projects in Dubai for Vant Nexus Technologies LLC. Explore The gTLD Blog and The gTLD Network, and subscribe to the Vant Nexus newsletter."
   },
   "jovenet.email": {
     lang: "en",
@@ -45,7 +47,8 @@ const PAGES = {
     storyCopy: "Jovenet Consulting worked in the new gTLD field for 14 years, spanning the first ICANN application round and the subsequent development of the programme.",
     contactTitle: "Get in touch",
     contactCopy: "To contact Jean Guillon, use his LinkedIn profile.",
-    partnerLead: "Related:"
+    networkTitle: "Registry development at Vant Nexus",
+    networkCopy: "Alongside the Jovenet email identity, Jean Guillon is now developing registries for Vant Nexus Technologies LLC in Dubai. Read The gTLD Blog, connect through The gTLD Network, or subscribe to the newsletter."
   },
   "jovenet.fr": {
     lang: "fr",
@@ -61,7 +64,8 @@ const PAGES = {
     storyCopy: "Depuis le premier cycle de nouveaux gTLD de l’ICANN, Jovenet a suivi l’évolution du programme et les transformations de cet environnement pour les candidats, les titulaires de marques et les acteurs du secteur des noms de domaine.",
     contactTitle: "Poursuivre l’échange",
     contactCopy: "Pour toute demande, vous pouvez contacter Jean Guillon directement sur LinkedIn.",
-    partnerLead: "À découvrir :"
+    networkTitle: "Une nouvelle étape dans le développement de registres",
+    networkCopy: "Jean Guillon développe désormais des registres pour Vant Nexus Technologies LLC, à Dubaï. Retrouvez les actualités sur The gTLD Blog et The gTLD Network, ou abonnez-vous à notre newsletter."
   }
 };
 
@@ -110,6 +114,8 @@ function render(html, host, page) {
   html = setElement(html, "story-copy", page.storyCopy, "p");
   html = setElement(html, "contact-title", page.contactTitle, "h2");
   html = setElement(html, "contact-copy", page.contactCopy, "p");
+  html = setElement(html, "network-title", page.networkTitle, "h2");
+  html = setElement(html, "network-copy", page.networkCopy, "p");
   if (page.lang === "fr") {
     html = html.replace('id="header-link" href="https://www.linkedin.com/in/guillon/">Connect with Jean Guillon ↗', 'id="header-link" href="https://www.linkedin.com/in/guillon/">Contacter Jean Guillon ↗');
     html = html.replace('id="contact-button">Contact Jean Guillon ↗', 'id="contact-button">Contacter Jean Guillon ↗');
