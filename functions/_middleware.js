@@ -70,8 +70,12 @@ const esc = (value) => String(value).replace(/[&<>"']/g, (c) => ({
 }[c]));
 
 function setElement(html, id, value, tag) {
-  const re = new RegExp("<" + tag + "(\\s+[^>]*?\\sid=[\\\"']" + id + "[\\\"'][^>]*)>[\\s\\S]*?<\/" + tag + ">", "i");
-  return html.replace(re, (match, attrs) => "<" + tag + attrs + ">" + esc(value) + "</" + tag + ">");
+  const re = new RegExp("<" + tag + "\\b(?=[^>]*\\sid=[\\\"']" + id + "[\\\"'])[^>]*>[\\s\\S]*?<\\/" + tag + ">", "i");
+  return html.replace(re, (match) => {
+    const opening = match.match(new RegExp("^<" + tag + "\\b[^>]*>", "i"));
+    if (!opening) return match;
+    return opening[0] + esc(value) + "</" + tag + ">";
+  });
 }
 
 function setMeta(html, selector, value) {
