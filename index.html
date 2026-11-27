@@ -38,8 +38,8 @@
     .contact p{font-size:13px;color:var(--muted);margin:0}
     .button{display:inline-flex;align-items:center;justify-content:center;padding:13px 19px;border-radius:4px;background:var(--ink);color:white;text-decoration:none;font-size:13px;font-weight:650;white-space:nowrap;transition:background .2s}
     .button:hover{background:var(--blue)}
-    .partner{padding:0 0 54px;font-size:13px;color:var(--muted)}
-    .partner a,.textlink{color:var(--blue);text-decoration:none;font-weight:600}
+    .vant-link{color:var(--blue)!important;font-size:11px;font-weight:600!important;text-decoration:none}
+    .vant-link:hover{color:var(--ink)!important}
     footer{border-top:1px solid var(--line);padding:25px 0 30px}
     .foot{display:flex;align-items:center;justify-content:space-between;gap:20px}
     .copyright{font-size:11px;color:#8793a2}
@@ -71,11 +71,11 @@
       <div><h2 id="contact-title">Continue the conversation</h2><p id="contact-copy">For enquiries, connect directly with Jean Guillon on LinkedIn.</p></div>
       <a class="button" href="https://www.linkedin.com/in/guillon/" id="contact-button">Contact Jean Guillon ↗</a>
     </section>
-    <p class="partner" id="partner">Also: <a href="https://vant.nexus" target="_blank" rel="noopener noreferrer">Vant Nexus Technologies LLC</a> — a new company involved in the second ICANN new gTLD application round.</p>
   </main>
   <footer><div class="wrap foot">
     <span class="copyright" id="copyright">© <span id="year"></span> Jovenet. All rights reserved.</span>
     <nav class="social" aria-label="Social links">
+      <a class="vant-link" href="https://vant.nexus" target="_blank" rel="noopener noreferrer">Vant Nexus Technologies LLC</a>
       <a class="icann" href="https://www.icann.org/" target="_blank" rel="noopener noreferrer" aria-label="ICANN">ICANN</a>
       <a href="https://x.com/jeanguillon" target="_blank" rel="noopener noreferrer" aria-label="Jean Guillon on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 13.9 4.9 22H1.8l7.3-8.4L1.3 2h6.5l4.5 7.5L18.9 2Zm-1.1 18h1.7L6.8 3.9H5L17.8 20Z"/></svg><span>X</span></a>
       <a href="https://bsky.app/profile/gtld.club" target="_blank" rel="noopener noreferrer" aria-label="gTLD Club on Bluesky"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 3.3C8 5.4 11 9.7 12 12c1-2.3 4-6.6 6.8-8.7 2-1.5 5.2-2.7 5.2 1 0 .8-.5 6.4-.8 7.3-.9 3-4.1 3.8-7 3.3 5.1.9 6.4 3.8 3.6 6.7-5.3 5.5-7.6-1.4-8.2-3.2-.1-.3-.2-.5-.3-.7-.1.2-.2.4-.3.7-.6 1.8-2.9 8.7-8.2 3.2-2.8-2.9-1.5-5.8 3.6-6.7-2.9.5-6.1-.3-7-3.3C-.9 10.7-1.4 5.1-1.4 4.3c0-3.7 3.2-2.5 5.2-1Z"/></svg><span>Bluesky</span></a>
@@ -126,11 +126,6 @@
     const ogDesc = document.querySelector('meta[property="og:description"]'); if(ogDesc) ogDesc.content = page.description;
     const map = {"eyebrow":"eyebrow","headline":"headline","intro":"intro","aboutTitle":"about-title","aboutCopy":"about-copy","storyTitle":"story-title","storyCopy":"story-copy","contactTitle":"contact-title","contactCopy":"contact-copy"};
     Object.entries(map).forEach(([key,id])=>{document.getElementById(id).textContent=page[key]});
-    const partner = document.getElementById("partner");
-    const lead = page.partner.split(" — ");
-    partner.replaceChildren(document.createTextNode(lead[0]+ " "));
-    const link=document.createElement("a");link.href="https://vant.nexus";link.target="_blank";link.rel="noopener noreferrer";link.textContent="Vant Nexus Technologies LLC";
-    partner.append(link,document.createTextNode(lead[1] ? " — "+lead[1] : ""));
     document.getElementById("year").textContent = new Date().getFullYear();
     if(page.lang==="fr"){
       document.getElementById("header-link").textContent="Contacter Jean Guillon ↗";
